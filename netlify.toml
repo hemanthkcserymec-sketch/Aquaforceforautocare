@@ -15,19 +15,19 @@
 
 [[redirects]]
   from = "/aquaforceforgigworkers/*"
-  to = "https://promec-gig-workers.vercel.app/aquaforceforgigworkers/:splat"
+  to = "https://aquaforceforgigworkers.netlify.app/aquaforceforgigworkers/:splat"
   status = 200
   force = true
 
 [[redirects]]
   from = "/aquaforceforservicepartner/*"
-  to = "https://promec-gig-workers.vercel.app/aquaforceforgigworkers/:splat"
+  to = "https://aquaforceforgigworkers.netlify.app/aquaforceforgigworkers/:splat"
   status = 200
   force = true
 
 [[redirects]]
   from = "/servicepartner/*"
-  to = "https://promec-gig-workers.vercel.app/aquaforceforgigworkers/:splat"
+  to = "https://aquaforceforgigworkers.netlify.app/aquaforceforgigworkers/:splat"
   status = 200
   force = true
 
