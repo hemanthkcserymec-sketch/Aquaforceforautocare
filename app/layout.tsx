@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
-import { Inter, Montserrat, Montserrat_Alternates, Open_Sans, Unbounded } from "next/font/google";
 import "./globals.css";
 import { OrderModalProvider } from "@/context/OrderModalContext";
 import { BulkEnquiryProvider } from "@/context/BulkEnquiryContext";
@@ -14,41 +13,6 @@ export const viewport: Viewport = {
   viewportFit: "cover",
   themeColor: "#ffffff",
 };
-
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
-  weight: ["300", "400", "500", "600", "700", "800", "900"],
-});
-
-const montserrat = Montserrat({
-  subsets: ["latin"],
-  variable: "--font-montserrat",
-  display: "swap",
-  weight: ["300", "400", "500", "600", "700", "800", "900"],
-});
-
-const montserratAlternates = Montserrat_Alternates({
-  subsets: ["latin"],
-  variable: "--font-montserrat-alternates",
-  display: "swap",
-  weight: ["300", "400", "500", "600", "700", "800", "900"],
-});
-
-const openSans = Open_Sans({
-  subsets: ["latin"],
-  variable: "--font-open-sans",
-  display: "swap",
-  weight: ["300", "400", "500", "600", "700", "800"],
-});
-
-const unbounded = Unbounded({
-  subsets: ["latin"],
-  variable: "--font-unbounded",
-  display: "swap",
-  weight: ["400", "500", "600", "700", "800", "900"],
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://promectools.in"),
@@ -118,6 +82,13 @@ export default function RootLayout({
         </noscript>
         {/* Google Analytics 4 (GA4) */}
         <GoogleAnalytics />
+        {/* Google Fonts */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Montserrat+Alternates:wght@300;400;500;600;700;800;900&family=Montserrat:ital,wght@0,300..900;1,300..900&family=Open+Sans:wght@300;400;500;600;700;800&family=Unbounded:wght@400;500;600;700;800;900&display=swap"
+          rel="stylesheet"
+        />
         <style dangerouslySetInnerHTML={{ __html: `
           @keyframes preloader-slide {
             0% { transform: translateX(-10%); }
@@ -126,7 +97,7 @@ export default function RootLayout({
           }
         ` }} />
       </head>
-      <body className={`${inter.variable} ${montserrat.variable} ${montserratAlternates.variable} ${openSans.variable} ${unbounded.variable} antialiased font-sans`}>
+      <body className="antialiased font-sans">
         <Preloader />
         <OrderModalProvider>
           <BulkEnquiryProvider>{children}</BulkEnquiryProvider>
