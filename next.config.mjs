@@ -149,8 +149,7 @@ const nextConfig = {
     };
   },
   images: {
-    unoptimized: true,
-    qualities: [75, 100],
+    qualities: [75, 90],
     remotePatterns: [
       { protocol: "https", hostname: "images.unsplash.com" },
     ],

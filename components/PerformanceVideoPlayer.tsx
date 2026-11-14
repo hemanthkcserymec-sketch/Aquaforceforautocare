@@ -11,6 +11,7 @@ interface PerformanceVideoPlayerProps {
 
 export default function PerformanceVideoPlayer({
   className = "",
+  videoSrc,
 }: PerformanceVideoPlayerProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -233,10 +234,12 @@ export default function PerformanceVideoPlayer({
               autoPlay
               muted={isMuted}
               playsInline
+              preload="metadata"
               onEnded={handleVideoEnded}
               onClick={togglePlay}
               className="w-full h-full object-cover cursor-pointer block"
             >
+              {videoSrc && <source src={videoSrc} type="video/mp4" />}
               <source src="/aquaforceforautocare/ASMR_PROMEC_LAPTOP_compressed.mp4" type="video/mp4" />
               <source src="/ASMR_PROMEC_LAPTOP_compressed.mp4" type="video/mp4" />
               <source src="/aquaforceforautocare/ASMR%20PROMEC%20LAPTOP.mp4" type="video/mp4" />
