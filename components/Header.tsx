@@ -129,7 +129,12 @@ export default function Header() {
         }`}
       >
         {/* PROMEC Brand Logo */}
-        <div className="flex items-center group shrink-0 select-none">
+        <a
+          href="https://www.promectools.in/"
+          className="flex items-center group shrink-0 select-none cursor-pointer transition-transform hover:scale-105 active:scale-95"
+          title="PROMEC Tools"
+          aria-label="PROMEC Tools Home"
+        >
           <div
             className={`relative transition-all duration-300 shrink-0 ${
               scrolled
@@ -146,7 +151,7 @@ export default function Header() {
               className="object-contain object-left"
             />
           </div>
-        </div>
+        </a>
 
         {/* Center Navigation Links */}
         <nav className="hidden md:flex items-center gap-7 lg:gap-11">

@@ -79,7 +79,12 @@ function ThankYouContent() {
     <div className="min-h-screen bg-[#0b0c0e] flex flex-col justify-between text-slate-900">
       {/* Clean Dedicated Brand Header - No overlapping navigation links */}
       <header className="w-full h-16 sm:h-20 bg-[#0b0c0e] border-b border-white/10 flex items-center justify-center px-4 shrink-0">
-        <div className="relative w-[150px] h-[36px] sm:w-[180px] sm:h-[42px]">
+        <a
+          href="https://www.promectools.in/"
+          className="relative w-[150px] h-[36px] sm:w-[180px] sm:h-[42px] block cursor-pointer transition-transform hover:scale-105 active:scale-95"
+          title="PROMEC Tools"
+          aria-label="PROMEC Tools Home"
+        >
           <Image
             src="/aquaforceforautocare/images/promec-logo.svg"
             alt="PROMEC"
@@ -88,7 +93,7 @@ function ThankYouContent() {
             className="object-contain object-center"
             priority
           />
-        </div>
+        </a>
       </header>
 
       {/* Centered Confirmation Dialog Card with Generous Margins */}

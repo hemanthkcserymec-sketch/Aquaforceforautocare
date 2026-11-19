@@ -199,9 +199,11 @@ function InquiryFormContent() {
       {/* Brand Top Header Bar (Matches Site Header Aesthetic) */}
       <header className="border-b border-white/10 bg-black/80 backdrop-blur-md sticky top-0 z-40">
         <div className="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
-          <Link
-            href="/"
-            className="flex items-center gap-3 group transition-transform active:scale-95"
+          <a
+            href="https://www.promectools.in/"
+            className="flex items-center gap-3 group transition-transform hover:scale-105 active:scale-95 cursor-pointer"
+            title="PROMEC Tools"
+            aria-label="PROMEC Tools Home"
           >
             <div className="relative w-[135px] h-[28px] sm:w-[170px] sm:h-[34px]">
               <Image
@@ -212,7 +214,7 @@ function InquiryFormContent() {
                 className="object-contain object-left"
               />
             </div>
-          </Link>
+          </a>
 
           <div className="flex items-center gap-2 sm:gap-3">
             <Link
