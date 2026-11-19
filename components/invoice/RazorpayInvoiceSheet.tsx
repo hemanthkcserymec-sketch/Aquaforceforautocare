@@ -45,7 +45,7 @@ export default function RazorpayInvoiceSheet({ invoice, className = "" }: Razorp
         <div className="flex items-start gap-3.5">
           <div className="relative w-11 h-11 shrink-0 pt-0.5">
             <Image
-              src="/images/amec-shield-logo.png"
+              src="/images/amec-shield-logo.webp"
               alt="AMEC Mobility"
               width={44}
               height={44}

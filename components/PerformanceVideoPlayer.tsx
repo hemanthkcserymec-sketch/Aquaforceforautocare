@@ -29,19 +29,46 @@ export default function PerformanceVideoPlayer({
   const [touchStartX, setTouchStartX] = useState<number | null>(null);
   const [touchEndX, setTouchEndX] = useState<number | null>(null);
 
-  // Autoplay video on initial mount if on video slide
+  // Lazy loading state: only load video when scrolled into view
+  const [isInView, setIsInView] = useState(false);
+
   useEffect(() => {
-    if (activeSlide === 0 && !isSliding) {
-      const video = videoRef.current;
-      if (!video) return;
+    const container = containerRef.current;
+    if (!container) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          setIsInView(entry.isIntersecting);
+        });
+      },
+      {
+        rootMargin: "250px 0px",
+        threshold: 0.1,
+      }
+    );
+
+    observer.observe(container);
+    return () => observer.disconnect();
+  }, []);
+
+  // Play/pause video according to visibility and active slide
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    if (isInView && activeSlide === 0 && !isSliding) {
       const playPromise = video.play();
       if (playPromise !== undefined) {
         playPromise
           .then(() => setIsPlaying(true))
           .catch(() => setIsPlaying(false));
       }
+    } else {
+      video.pause();
+      setIsPlaying(false);
     }
-  }, [activeSlide, isSliding]);
+  }, [isInView, activeSlide, isSliding]);
 
   // Unified transition: ALWAYS slides from right to left in both directions
   const triggerNextSlide = useCallback(() => {
@@ -231,19 +258,22 @@ export default function PerformanceVideoPlayer({
           >
             <video
               ref={videoRef}
-              autoPlay
               muted={isMuted}
               playsInline
-              preload="metadata"
+              preload={isInView ? "metadata" : "none"}
               onEnded={handleVideoEnded}
               onClick={togglePlay}
               className="w-full h-full object-cover cursor-pointer block"
             >
-              {videoSrc && <source src={videoSrc} type="video/mp4" />}
-              <source src="/aquaforceforautocare/ASMR_PROMEC_LAPTOP_compressed.mp4" type="video/mp4" />
-              <source src="/ASMR_PROMEC_LAPTOP_compressed.mp4" type="video/mp4" />
-              <source src="/aquaforceforautocare/ASMR%20PROMEC%20LAPTOP.mp4" type="video/mp4" />
-              <source src="/ASMR%20PROMEC%20LAPTOP.mp4" type="video/mp4" />
+              {isInView && (
+                <>
+                  {videoSrc && <source src={videoSrc} type="video/mp4" />}
+                  <source src="/aquaforceforautocare/ASMR_PROMEC_LAPTOP_compressed.mp4" type="video/mp4" />
+                  <source src="/ASMR_PROMEC_LAPTOP_compressed.mp4" type="video/mp4" />
+                  <source src="/aquaforceforautocare/ASMR%20PROMEC%20LAPTOP.mp4" type="video/mp4" />
+                  <source src="/ASMR%20PROMEC%20LAPTOP.mp4" type="video/mp4" />
+                </>
+              )}
             </video>
 
             {/* Mute/Unmute Button (Video Slide Only) */}
