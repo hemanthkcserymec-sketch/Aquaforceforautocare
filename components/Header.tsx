@@ -29,33 +29,24 @@ const CATEGORY_ITEMS = [
     desc: "Vehicle pressure washing",
     href: "/aquaforceforautocare",
     icon: Car,
-    iconColor: "text-[#38bdf8]",
-    iconBg: "bg-blue-500/20 border-blue-500/30",
-    badge: "Current",
   },
   {
-    name: "Service Partner",
+    name: "Service Partners",
     desc: "Delivery & rider partners",
     href: "https://promectools.in/aquaforceforgigworkers",
     icon: Bike,
-    iconColor: "text-amber-400",
-    iconBg: "bg-amber-500/20 border-amber-500/30",
   },
   {
     name: "Home Care",
     desc: "Driveway & domestic cleaning",
     href: "/inquiryform?category=Home+Care",
     icon: Home,
-    iconColor: "text-emerald-400",
-    iconBg: "bg-emerald-500/20 border-emerald-500/30",
   },
   {
     name: "Corporate & Facility Care",
     desc: "Industrial & commercial fleets",
     href: "/inquiryform?category=Corporate+%26+Facility+Care",
     icon: Building2,
-    iconColor: "text-purple-400",
-    iconBg: "bg-purple-500/20 border-purple-500/30",
   },
 ];
 
@@ -190,29 +181,22 @@ export default function Header() {
             {/* Dropdown Menu Popup */}
             {categoriesOpen && (
               <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2.5 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
-                <div className="w-[290px] bg-black/95 backdrop-blur-xl border border-white/20 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.7)] p-2 space-y-1">
+                <div className="w-[340px] sm:w-[370px] bg-black/95 backdrop-blur-2xl border border-white/15 rounded-2xl shadow-[0_24px_60px_rgba(0,0,0,0.85)] p-3 sm:p-3.5 space-y-1">
                   {CATEGORY_ITEMS.map((item) => {
                     const Icon = item.icon;
                     const isExternal = item.href?.startsWith("http");
                     const linkClassName =
-                      "flex items-center gap-3 p-2.5 rounded-xl hover:bg-white/10 active:bg-white/15 transition-all text-left group/item";
+                      "flex items-center gap-4 sm:gap-5 px-3.5 py-3 rounded-xl hover:bg-white/[0.08] active:bg-white/[0.12] transition-colors text-left group/item cursor-pointer";
                     const content = (
                       <>
-                        <div
-                          className={`w-8 h-8 rounded-lg ${item.iconBg} ${item.iconColor} flex items-center justify-center shrink-0 border transition-transform group-hover/item:scale-105`}
-                        >
-                          <Icon size={16} />
+                        <div className="w-9 h-9 flex items-center justify-center shrink-0 transition-transform duration-200 group-hover/item:scale-105">
+                          <Icon size={30} strokeWidth={2} className="text-white" />
                         </div>
                         <div className="min-w-0 flex-1">
-                          <div className="text-[13.5px] font-bold text-white font-montserrat flex items-center gap-2 truncate">
-                            <span className="truncate">{item.name}</span>
-                            {item.badge && (
-                              <span className="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded bg-sky-500/20 text-sky-300 border border-sky-400/30 shrink-0">
-                                {item.badge}
-                              </span>
-                            )}
+                          <div className="text-[16px] sm:text-[17px] font-bold text-white font-montserrat leading-tight tracking-normal">
+                            {item.name}
                           </div>
-                          <div className="text-[11px] text-white/60 font-open-sans truncate">
+                          <div className="text-[12.5px] sm:text-[13px] text-zinc-400 font-open-sans leading-normal mt-0.5">
                             {item.desc}
                           </div>
                         </div>
@@ -357,21 +341,25 @@ export default function Header() {
                 </button>
 
                 {mobileCategoriesOpen && (
-                  <div className="pl-3 pr-1 py-1 space-y-1 animate-in fade-in duration-150">
+                  <div className="pl-2 pr-1 py-1.5 space-y-1 animate-in fade-in duration-150">
                     {CATEGORY_ITEMS.map((item) => {
                       const Icon = item.icon;
                       const isExternal = item.href?.startsWith("http");
                       const mobileClass =
-                        "flex items-center gap-2.5 py-2 px-3 rounded-lg text-sm text-white/80 hover:text-white hover:bg-white/10";
+                        "flex items-center gap-3.5 py-2.5 px-3 rounded-xl text-white/90 hover:text-white hover:bg-white/[0.08] active:bg-white/[0.12] transition-colors";
                       const mobileContent = (
                         <>
-                          <Icon size={15} className={item.iconColor} />
-                          <span>{item.name}</span>
-                          {item.badge && (
-                            <span className="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.2 rounded bg-sky-500/20 text-sky-300 border border-sky-400/30 ml-auto">
-                              {item.badge}
-                            </span>
-                          )}
+                          <div className="w-8 h-8 flex items-center justify-center shrink-0">
+                            <Icon size={26} strokeWidth={2} className="text-white" />
+                          </div>
+                          <div className="min-w-0 flex-1">
+                            <div className="text-[15px] font-bold text-white font-montserrat leading-tight">
+                              {item.name}
+                            </div>
+                            <div className="text-[12px] text-zinc-400 font-open-sans leading-normal mt-0.5">
+                              {item.desc}
+                            </div>
+                          </div>
                         </>
                       );
 
@@ -445,16 +433,16 @@ export default function Header() {
             onClick={() => setMobileNavbarCategoriesOpen(false)}
           />
           <div
-            className={`md:hidden fixed left-4 right-4 z-50 bg-[#0b0c0e]/98 backdrop-blur-xl border border-white/20 p-3 rounded-2xl shadow-2xl animate-in fade-in slide-in-from-top-2 duration-200 pointer-events-auto max-w-[420px] mx-auto ${
+            className={`md:hidden fixed left-4 right-4 z-50 bg-black/95 backdrop-blur-2xl border border-white/15 p-3.5 rounded-2xl shadow-[0_24px_60px_rgba(0,0,0,0.85)] animate-in fade-in slide-in-from-top-2 duration-200 pointer-events-auto max-w-[390px] mx-auto ${
               scrolled ? "top-[70px] sm:top-[76px]" : "top-[72px] sm:top-[86px]"
             }`}
           >
-            <div className="text-[11px] font-bold text-white/50 uppercase tracking-wider px-2 pb-2 font-montserrat border-b border-white/10 mb-1.5 flex items-center justify-between">
+            <div className="text-[11px] font-bold text-white/50 uppercase tracking-wider px-2 pb-2.5 font-montserrat border-b border-white/10 mb-2 flex items-center justify-between">
               <span>Categories</span>
               <button
                 type="button"
                 onClick={() => setMobileNavbarCategoriesOpen(false)}
-                className="text-white/60 hover:text-white p-0.5 rounded cursor-pointer"
+                className="text-white/60 hover:text-white p-1 rounded cursor-pointer"
                 aria-label="Close categories"
               >
                 <X size={16} />
@@ -464,25 +452,33 @@ export default function Header() {
               {CATEGORY_ITEMS.map((item) => {
                 const Icon = item.icon;
                 const isExternal = item.href?.startsWith("http");
+                const linkClassName =
+                  "flex items-center gap-4 px-3 py-2.5 rounded-xl hover:bg-white/[0.08] active:bg-white/[0.12] transition-colors text-left group/item cursor-pointer";
+                const content = (
+                  <>
+                    <div className="w-8 h-8 flex items-center justify-center shrink-0">
+                      <Icon size={28} strokeWidth={2} className="text-white" />
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <div className="text-[15.5px] font-bold text-white font-montserrat leading-tight">
+                        {item.name}
+                      </div>
+                      <div className="text-[12px] text-zinc-400 font-open-sans leading-normal mt-0.5">
+                        {item.desc}
+                      </div>
+                    </div>
+                  </>
+                );
+
                 if (isExternal) {
                   return (
                     <a
                       key={item.name}
                       href={item.href}
                       onClick={() => setMobileNavbarCategoriesOpen(false)}
-                      className="flex items-center gap-3 p-2.5 rounded-xl hover:bg-white/10 active:bg-white/15 transition-all text-left group/item cursor-pointer"
+                      className={linkClassName}
                     >
-                      <div className={`w-8 h-8 rounded-lg ${item.iconBg} ${item.iconColor} flex items-center justify-center shrink-0 border transition-transform group-hover/item:scale-105`}>
-                        <Icon size={16} />
-                      </div>
-                      <div className="min-w-0 flex-1">
-                        <div className="text-[13.5px] font-bold text-white font-montserrat flex items-center gap-2 truncate">
-                          <span className="truncate">{item.name}</span>
-                        </div>
-                        <div className="text-[11px] text-white/60 font-open-sans truncate">
-                          {item.desc}
-                        </div>
-                      </div>
+                      {content}
                     </a>
                   );
                 }
@@ -492,24 +488,9 @@ export default function Header() {
                     key={item.name}
                     href={item.href || "#"}
                     onClick={() => setMobileNavbarCategoriesOpen(false)}
-                    className="flex items-center gap-3 p-2.5 rounded-xl hover:bg-white/10 active:bg-white/15 transition-all text-left group/item cursor-pointer"
+                    className={linkClassName}
                   >
-                    <div className={`w-8 h-8 rounded-lg ${item.iconBg} ${item.iconColor} flex items-center justify-center shrink-0 border transition-transform group-hover/item:scale-105`}>
-                      <Icon size={16} />
-                    </div>
-                    <div className="min-w-0 flex-1">
-                      <div className="text-[13.5px] font-bold text-white font-montserrat flex items-center gap-2 truncate">
-                        <span className="truncate">{item.name}</span>
-                        {item.badge && (
-                          <span className="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded bg-sky-500/20 text-sky-300 border border-sky-400/30 shrink-0">
-                            {item.badge}
-                          </span>
-                        )}
-                      </div>
-                      <div className="text-[11px] text-white/60 font-open-sans truncate">
-                        {item.desc}
-                      </div>
-                    </div>
+                    {content}
                   </Link>
                 );
               })}
