@@ -180,7 +180,11 @@ export default function Header() {
 
             {/* Dropdown Menu Popup */}
             {categoriesOpen && (
-              <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
+              <div
+                className={`absolute top-full left-1/2 -translate-x-1/2 z-50 animate-in fade-in slide-in-from-top-2 duration-150 ${
+                  scrolled ? "pt-7 sm:pt-8" : "pt-9 sm:pt-11"
+                }`}
+              >
                 <div className="w-[285px] sm:w-[295px] bg-black/95 backdrop-blur-2xl border border-white/15 rounded-xl shadow-[0_16px_40px_rgba(0,0,0,0.85)] p-2 space-y-0.5">
                   {CATEGORY_ITEMS.map((item) => {
                     const Icon = item.icon;
