@@ -180,23 +180,23 @@ export default function Header() {
 
             {/* Dropdown Menu Popup */}
             {categoriesOpen && (
-              <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2.5 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
-                <div className="w-[340px] sm:w-[370px] bg-black/95 backdrop-blur-2xl border border-white/15 rounded-2xl shadow-[0_24px_60px_rgba(0,0,0,0.85)] p-3 sm:p-3.5 space-y-1">
+              <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
+                <div className="w-[285px] sm:w-[295px] bg-black/95 backdrop-blur-2xl border border-white/15 rounded-xl shadow-[0_16px_40px_rgba(0,0,0,0.85)] p-2 space-y-0.5">
                   {CATEGORY_ITEMS.map((item) => {
                     const Icon = item.icon;
                     const isExternal = item.href?.startsWith("http");
                     const linkClassName =
-                      "flex items-center gap-4 sm:gap-5 px-3.5 py-3 rounded-xl hover:bg-white/[0.08] active:bg-white/[0.12] transition-colors text-left group/item cursor-pointer";
+                      "flex items-center gap-3 px-2.5 py-2 rounded-lg hover:bg-white/[0.08] active:bg-white/[0.12] transition-colors text-left group/item cursor-pointer";
                     const content = (
                       <>
-                        <div className="w-9 h-9 flex items-center justify-center shrink-0 transition-transform duration-200 group-hover/item:scale-105">
-                          <Icon size={30} strokeWidth={2} className="text-white" />
+                        <div className="w-7 h-7 flex items-center justify-center shrink-0 transition-transform duration-200 group-hover/item:scale-105">
+                          <Icon size={22} strokeWidth={2} className="text-white" />
                         </div>
                         <div className="min-w-0 flex-1">
-                          <div className="text-[16px] sm:text-[17px] font-bold text-white font-montserrat leading-tight tracking-normal">
+                          <div className="text-[13.5px] font-bold text-white font-montserrat leading-tight tracking-normal">
                             {item.name}
                           </div>
-                          <div className="text-[12.5px] sm:text-[13px] text-zinc-400 font-open-sans leading-normal mt-0.5">
+                          <div className="text-[11px] text-zinc-400 font-open-sans leading-tight mt-0.5">
                             {item.desc}
                           </div>
                         </div>
@@ -433,37 +433,37 @@ export default function Header() {
             onClick={() => setMobileNavbarCategoriesOpen(false)}
           />
           <div
-            className={`md:hidden fixed left-4 right-4 z-50 bg-black/95 backdrop-blur-2xl border border-white/15 p-3.5 rounded-2xl shadow-[0_24px_60px_rgba(0,0,0,0.85)] animate-in fade-in slide-in-from-top-2 duration-200 pointer-events-auto max-w-[390px] mx-auto ${
+            className={`md:hidden fixed left-4 right-4 z-50 bg-black/95 backdrop-blur-2xl border border-white/15 p-2.5 rounded-xl shadow-[0_16px_40px_rgba(0,0,0,0.85)] animate-in fade-in slide-in-from-top-2 duration-200 pointer-events-auto max-w-[310px] mx-auto ${
               scrolled ? "top-[70px] sm:top-[76px]" : "top-[72px] sm:top-[86px]"
             }`}
           >
-            <div className="text-[11px] font-bold text-white/50 uppercase tracking-wider px-2 pb-2.5 font-montserrat border-b border-white/10 mb-2 flex items-center justify-between">
+            <div className="text-[10px] font-bold text-white/50 uppercase tracking-wider px-2 pb-2 font-montserrat border-b border-white/10 mb-1.5 flex items-center justify-between">
               <span>Categories</span>
               <button
                 type="button"
                 onClick={() => setMobileNavbarCategoriesOpen(false)}
-                className="text-white/60 hover:text-white p-1 rounded cursor-pointer"
+                className="text-white/60 hover:text-white p-0.5 rounded cursor-pointer"
                 aria-label="Close categories"
               >
-                <X size={16} />
+                <X size={15} />
               </button>
             </div>
-            <div className="space-y-1">
+            <div className="space-y-0.5">
               {CATEGORY_ITEMS.map((item) => {
                 const Icon = item.icon;
                 const isExternal = item.href?.startsWith("http");
                 const linkClassName =
-                  "flex items-center gap-4 px-3 py-2.5 rounded-xl hover:bg-white/[0.08] active:bg-white/[0.12] transition-colors text-left group/item cursor-pointer";
+                  "flex items-center gap-3 px-2 py-1.5 rounded-lg hover:bg-white/[0.08] active:bg-white/[0.12] transition-colors text-left group/item cursor-pointer";
                 const content = (
                   <>
-                    <div className="w-8 h-8 flex items-center justify-center shrink-0">
-                      <Icon size={28} strokeWidth={2} className="text-white" />
+                    <div className="w-7 h-7 flex items-center justify-center shrink-0">
+                      <Icon size={22} strokeWidth={2} className="text-white" />
                     </div>
                     <div className="min-w-0 flex-1">
-                      <div className="text-[15.5px] font-bold text-white font-montserrat leading-tight">
+                      <div className="text-[13px] font-bold text-white font-montserrat leading-tight">
                         {item.name}
                       </div>
-                      <div className="text-[12px] text-zinc-400 font-open-sans leading-normal mt-0.5">
+                      <div className="text-[10.5px] text-zinc-400 font-open-sans leading-tight mt-0.5">
                         {item.desc}
                       </div>
                     </div>
