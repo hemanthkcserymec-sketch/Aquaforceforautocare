@@ -181,7 +181,7 @@ export default function Header() {
             {/* Dropdown Menu Popup */}
             {categoriesOpen && (
               <div
-                className={`absolute top-full left-1/2 -translate-x-1/2 z-50 animate-in fade-in slide-in-from-top-2 duration-150 ${
+                className={`absolute top-full left-0 z-50 animate-in fade-in slide-in-from-top-2 duration-150 ${
                   scrolled ? "pt-7 sm:pt-8" : "pt-9 sm:pt-11"
                 }`}
               >
