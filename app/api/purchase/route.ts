@@ -132,6 +132,8 @@ export async function POST(req: Request) {
 
     const webhookUrl =
       process.env.GOOGLE_SHEET_PURCHASE_URL ||
+      process.env.GOOGLE_SHEET_MAIN_URL ||
+      process.env.GOOGLE_SHEET_URL ||
       "https://script.google.com/macros/s/AKfycbw93k8Td-zP_4HnTq4QTio4KgbFobeXatiTR2BvPPJJczur1RFRggZHq15InxQJBthFAw/exec";
 
     if (webhookUrl) {

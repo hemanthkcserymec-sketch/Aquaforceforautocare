@@ -397,7 +397,11 @@ export async function executeOrderFulfillment(
   }
 
   // Channel E: Google Sheets Webhook Log
-  const sheetUrl = process.env.GOOGLE_SHEET_PURCHASE_URL || "";
+  const sheetUrl =
+    process.env.GOOGLE_SHEET_PURCHASE_URL ||
+    process.env.GOOGLE_SHEET_MAIN_URL ||
+    process.env.GOOGLE_SHEET_URL ||
+    "";
   if (sheetUrl && (!googleSheetSuccess || options?.force)) {
     tasks.push(
       (async () => {
