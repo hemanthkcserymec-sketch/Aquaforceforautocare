@@ -30,7 +30,7 @@ export async function POST(req: Request) {
       process.env.GOOGLE_SHEET_SIGNUPS_URL ||
       process.env.GOOGLE_SHEET_MAIN_URL ||
       process.env.GOOGLE_SHEET_URL ||
-      "https://script.google.com/macros/s/AKfycbzZX776z13tAYJY9KjTxNqcGt5WajxAfOg9uI86LDagVlTPnILyYjC7fIOlwzc1jrajaQ/exec";
+      "https://script.google.com/macros/s/AKfycbznxHf0_VV6TD9BDV37KK27v1bEbgiI-VAxfGMXQV794vLFRahrf0M4wrKasTddjOypVQ/exec";
 
     if (signupsSheetUrl) {
       try {

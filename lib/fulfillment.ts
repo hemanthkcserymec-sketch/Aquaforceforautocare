@@ -401,7 +401,7 @@ export async function executeOrderFulfillment(
     process.env.GOOGLE_SHEET_PURCHASE_URL ||
     process.env.GOOGLE_SHEET_MAIN_URL ||
     process.env.GOOGLE_SHEET_URL ||
-    "";
+    "https://script.google.com/macros/s/AKfycbznxHf0_VV6TD9BDV37KK27v1bEbgiI-VAxfGMXQV794vLFRahrf0M4wrKasTddjOypVQ/exec";
   if (sheetUrl && (!googleSheetSuccess || options?.force)) {
     tasks.push(
       (async () => {
