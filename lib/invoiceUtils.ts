@@ -190,8 +190,10 @@ export function numberToWordsINR(amount: number): string {
  * e.g. "AQUA-R/INV-1"
  */
 export function getInvoiceNumber(orderId: string, invoiceId?: string): string {
-  if (invoiceId && (invoiceId.startsWith("AQUA-") || invoiceId.startsWith("inv_"))) return invoiceId;
-  if (orderId.startsWith("AQUA-C/INV-") || orderId.startsWith("AQUA-")) return orderId;
+  if (orderId && (orderId.startsWith("AQUA-R/INV-") || orderId.startsWith("AQUA-C/INV-") || orderId.startsWith("AQUA-"))) {
+    return orderId;
+  }
+  if (invoiceId && invoiceId.startsWith("AQUA-")) return invoiceId;
   if (orderId.includes("TngOjjfbBHei28")) return "AQUA-C/INV-1";
   if (orderId.includes("TVWMNCnxp7pU2C")) return "AQUA-R/INV-1";
   if (orderId.includes("TYe1byjoJmIO4u")) return "AQUA-R/INV-2";

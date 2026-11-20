@@ -5,6 +5,7 @@ import { orderStore, PromecOrder } from "@/lib/orderStore";
 import { profileStore } from "@/lib/profileStore";
 import { getLiveActiveOfferIds } from "@/lib/razorpayLiveOffers";
 import { getPromecPayLaterOfferIds } from "@/lib/razorpayOffers";
+import { getNextRetailOrderId } from "@/lib/orderSequence";
 
 export async function POST(req: Request) {
   try {
@@ -93,8 +94,8 @@ export async function POST(req: Request) {
       );
     }
 
-    // Unique internal Promec Order ID
-    const promecOrderId = `PROMEC-ORD-${Date.now()}-${Math.random().toString(36).substring(2, 6).toUpperCase()}`;
+    // Sequential Retail Order ID (AQUA-R/INV-1, AQUA-R/INV-2, AQUA-R/INV-11, etc.)
+    const promecOrderId = await getNextRetailOrderId();
 
     // Initialize Razorpay SDK
     const razorpay = new Razorpay({

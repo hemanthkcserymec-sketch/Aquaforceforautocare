@@ -80,6 +80,7 @@ export async function generateAndSendRazorpayInvoice({
     const invoicePayload: any = {
       type: "invoice",
       invoice_number: invoiceNumber,
+      receipt: invoiceNumber,
       description: `Invoice to ${custName} for ${primaryItem.productName}`,
       currency: "INR",
       // Keep customer details on the invoice itself. Reusing a Razorpay
@@ -129,7 +130,17 @@ export async function generateAndSendRazorpayInvoice({
     let invoiceUrl = "";
 
     try {
-      const invoice: any = await (razorpay.invoices as any).create(invoicePayload);
+      let invoice: any;
+      try {
+        invoice = await (razorpay.invoices as any).create(invoicePayload);
+      } catch (createErr: any) {
+        console.warn(
+          `[Razorpay Invoice] Custom invoice_number creation warning (${createErr?.message}), retrying without explicit invoice_number...`
+        );
+        const fallbackPayload = { ...invoicePayload };
+        delete fallbackPayload.invoice_number;
+        invoice = await (razorpay.invoices as any).create(fallbackPayload);
+      }
       if (invoice?.id) {
         invoiceId = invoice.id;
         invoiceUrl = invoice.short_url || `https://invoices.razorpay.com/v1/l/${invoice.id}`;
