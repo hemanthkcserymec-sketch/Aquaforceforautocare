@@ -169,27 +169,42 @@ export async function POST(req: Request) {
         year: "numeric",
       });
 
-      const fullAddress = `${deliveryAddress}, ${city}, ${state} - ${pincode}`;
+      // Strict WhatsApp Cloud API parameter formatting: No newlines, tabs, or >= 4 consecutive spaces
+      const sanitizeWhatsAppParam = (val: any, fallback: string = "-"): string => {
+        if (val === undefined || val === null) return fallback;
+        const str = String(val)
+          .replace(/[\r\n\t]+/g, ", ")
+          .replace(/,\s*,+/g, ", ")
+          .replace(/\s{2,}/g, " ")
+          .trim();
+        return str.length > 0 ? str : fallback;
+      };
+
+      const fullAddress = sanitizeWhatsAppParam(`${deliveryAddress}, ${city}, ${state} - ${pincode}`);
+      const bannerUrl =
+        process.env.WHATSAPP_BANNER_IMAGE_URL ||
+        "https://promectools.in/aquaforceforautocare/images/order-confirmation-banner.png";
 
       try {
         const aiRes = await fetch("https://backend.aisensy.com/campaign/t1/api/v2", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
+          signal: AbortSignal.timeout(8000),
           body: JSON.stringify({
             apiKey: aisensyApiKey,
             campaignName: aisensyCampaign,
             destination: destination,
-            userName: fullName,
+            userName: sanitizeWhatsAppParam(fullName, "Customer"),
             templateParams: [
-              fullName,                                    // {1} - Name
-              payload.product,                             // {2} - Product
-              String(payload.quantity),                     // {3} - Quantity
-              payload.orderId,                             // {4} - Order ID
-              fullAddress,                                 // {5} - Delivery Address
-              estimatedDelivery,                           // {6} - Estimated Delivery Date
+              sanitizeWhatsAppParam(fullName, "Customer"),
+              sanitizeWhatsAppParam(payload.product, "AquaForce 1400"),
+              sanitizeWhatsAppParam(String(payload.quantity), "1"),
+              sanitizeWhatsAppParam(payload.orderId, "-"),
+              fullAddress,
+              sanitizeWhatsAppParam(estimatedDelivery, "5-7 business days"),
             ],
             media: {
-              url: "https://files.catbox.moe/jpksbs.png",
+              url: bannerUrl,
               filename: "Promec Tools WhatsApp Template Image.png",
             },
           }),

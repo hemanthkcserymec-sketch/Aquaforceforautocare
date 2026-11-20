@@ -135,6 +135,15 @@ export async function generateAndSendRazorpayInvoice({
         invoiceUrl = invoice.short_url || `https://invoices.razorpay.com/v1/l/${invoice.id}`;
         console.log(`[Razorpay Invoice] Successfully generated Razorpay Invoice: ${invoiceId} (URL: ${invoiceUrl})`);
 
+        // Issue the invoice immediately so it moves from draft to issued state
+        try {
+          const issued: any = await (razorpay.invoices as any).issue(invoiceId);
+          invoiceUrl = issued?.short_url || invoiceUrl;
+          console.log(`[Razorpay Invoice] Auto-issued Invoice: ${invoiceId}`);
+        } catch (issueErr: any) {
+          console.warn("[Razorpay Invoice] Issue step note:", issueErr?.message || issueErr);
+        }
+
         // Dispatch explicit notifications via Razorpay's notifyBy endpoints
         if (custEmail) {
           try {
